@@ -50,10 +50,11 @@ function shuffle() {
 
       if (curr == items.length) {
         clearInterval(ticker)
+        ticker = null
         setTimeout(() => {
           query('button.play').forEach(b => b.removeAttribute('disabled'))
           resolve()
-        }, 350)  
+        }, 750)  
       } else {
         el = id(items[curr].id)
         el.parentElement.classList.add('is-warning')
@@ -66,7 +67,7 @@ function shuffle() {
 
 // everybody play the game
 function startGame(type) {
-  lockInput(true)
+  lockTarget(true)
   let tEl = id('num-target')
   let task = [tEl.value]
 
@@ -122,6 +123,7 @@ function startGame(type) {
   renderExpr()
 
   solver.postMessage(['solve', task.join(' ')])
+  id('panel-target').scrollIntoView()
 }
 
 function finishGame() {
@@ -184,7 +186,7 @@ function handleSolution() {
       show('panel-start', 'panel-input', 'panel-found', 'panel-incorrect')
     }
 
-    lockInput(false)
+    lockTarget(false)
     id('panel-input').scrollIntoView()
   }
 }
@@ -258,13 +260,16 @@ function renderExpr() {
   }
 }
 
-function lockInput(lock) {
-  let nums = query('select.num, #num-target')
+function lockTarget(lock) {
+  let v = id('target-view')
 
   if (lock) {
-    nums.forEach(n => n.setAttribute('disabled', 'disabled'))
+    query('.target-input').forEach(e => e.classList.add('is-hidden'))
+    v.innerText = id('num-target').value
+    v.classList.remove('is-hidden')
   } else {
-    nums.forEach(n => n.removeAttribute('disabled'))
+    v.classList.add('is-hidden')
+    query('.target-input').forEach(e => e.classList.remove('is-hidden'))
   }
 }
 

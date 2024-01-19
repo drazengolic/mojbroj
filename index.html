@@ -45,6 +45,14 @@
       /* safari fix */
       align-items: initial;
     }
+    /*modal breakpoint*/
+    @media screen and (max-width:768px) {
+      .modal-card {
+          width: 320px !important;
+          margin:auto;
+          left: -0.45rem;
+      }
+    }
   </style>
 </head>
 
@@ -63,7 +71,7 @@
                     d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
                 </svg>
               </span>
-              <span>Правила</span>
+              <span class="is-size-7-mobile is-size-6-tablet">Правила</span>
             </button>
           </div>
           <div class="column has-text-centered is-4">
@@ -78,22 +86,23 @@
                     d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
                 </svg>
               </span>
-              <span>Статистика</span>
+              <span class="is-size-7-mobile is-size-6-tablet">Статистика</span>
             </button>
           </div>
         </div>
 
 
-        <div class="columns is-mobile is-centered">
+        <div class="columns is-mobile is-centered" id="panel-target">
           <div class="column is-half-mobile is-one-third-tablet">
             <div class="field">
               <label class="label">тражени број</label>
-              <div class="control">
+              <div class="control target-input">
                 <input id="num-target" class="input is-rounded" type="number" min="1" max="999" value="356"
                   placeholder="999">
               </div>
-              <p class="help">1-999</p>
+              <p class="help target-input">1-999</p>
             </div>
+            <div class="title animate__animated animate__fadeInDown is-hidden" id="target-view">356</div>
           </div>
         </div>
 
@@ -213,7 +222,7 @@
 
         <div class="notification is-info is-light animate__animated animate__fadeInUp is-hidden" id="panel-found">
           <p class="is-size-4" id="finder-formula"></p>
-          <p class="help">рјешено за <span id="finder-time"></span></p>
+          <p class="help">пронађено за <span id="finder-time"></span></p>
         </div>
 
         <div class="content mt-5 animate__animated animate__fadeInUp" id="panel-start">
@@ -304,7 +313,7 @@
           <div class="content has-text-centered">
             <p>
               &copy; 2024 <a href="https://www.drazengolic.com/sr/">Дражен Голић</a><br />
-              <small>Сав код и садржај су под лиценцом <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.sr-latn" target="_blank">CC BY-NC 4.0 Deed</a></small>
+              <small>WASM код је под лиценцом <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.sr-latn" target="_blank">CC BY-NC 4.0 Deed</a></small>
             </p>
             <p><small><b>Напомена:</b><br />аутор и страница нису повезани са Радио Телевизијом Србије нити њеним запосленима.</small></p>
           </div>
@@ -321,7 +330,7 @@
         <p class="modal-card-title">Правила</p>
       </header>
       <section class="modal-card-body">
-        <div class="content has-text-left">
+        <div class="content has-text-left is-size-7-mobile is-size-6-tablet">
           <p>
             Имаш <b>50 секунди</b> да нађеш израз којим се добија тражени број (или најближи могући) помоћу 6 задатих
             бројева и основних рачунских операција (+, -, *, /), као и заграда.
@@ -338,7 +347,7 @@
       </section>
       <footer class="modal-card-foot">
         <button id="btn-rules-close" class="button is-success">У реду</button>
-        <label class="checkbox">
+        <label class="checkbox is-size-7-mobile is-size-6-tablet">
           <input id="chk-show-rules" type="checkbox" checked>
           Прикажи правила пред игру
         </label>
@@ -354,27 +363,29 @@
       </header>
       <section class="modal-card-body">
         <div class="columns is-mobile is-multiline">
-          <div class="column is-4 has-text-centered">
-            <p class="heading">Укупно задатака</p>
+          <div class="column is-6-mobile is-4-tablet has-text-centered">
+            <p class="heading is-hidden-mobile">Укупно задатака</p>
+            <p class="heading is-hidden-tablet">Укупно<br />задатака</p>
             <p class="title" id="stat-total-count">0</p>
           </div>
-          <div class="column is-4 has-text-centered">
-            <p class="heading">Рјешено задатака</p>
+          <div class="column is-6-mobile is-4-tablet has-text-centered">
+            <p class="heading is-hidden-mobile">Рјешено задатака</p>
+            <p class="heading is-hidden-tablet">Рјешено<br />задатака</p>
             <p class="title" id="stat-win-count">0</p>
           </div>
-          <div class="column is-4 has-text-centered">
+          <div class="column is-6-mobile is-4-tablet has-text-centered">
             <p class="heading">Оцјена</p>
             <p class="title" id="stat-rating"></p>
           </div>
-          <div class="column is-4 has-text-centered">
+          <div class="column is-6-mobile is-4-tablet has-text-centered">
             <p class="heading">Укупно<br />времена</p>
-            <p class="title" id="stat-total-time">00:00:00</p>
+            <p class="title is-size-5-mobile is-size-3-tablet" id="stat-total-time">00:00:00</p>
           </div>
-          <div class="column is-4 has-text-centered">
+          <div class="column is-6-mobile is-4-tablet has-text-centered">
             <p class="heading">Просјечно вријеме<br />рјешавања</p>
             <p class="title" id="stat-avg-time">0s</p>
           </div>
-          <div class="column is-4 has-text-centered">
+          <div class="column is-6-mobile is-4-tablet has-text-centered">
             <p class="heading">Вријеме последњег<br />рјешења</p>
             <p class="title" id="stat-last-time">0s</p>
           </div>
